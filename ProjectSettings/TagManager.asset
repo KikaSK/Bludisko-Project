@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PyramidRoomDetector
   - ActiveCubeTag
+  - WallTag
   layers:
   - Default
   - TransparentFX
