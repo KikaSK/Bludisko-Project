@@ -7,6 +7,8 @@ TagManager:
   - PyramidRoomDetector
   - ActiveCubeTag
   - WallTag
+  - BucketForWater
+  - BucketHolder
   layers:
   - Default
   - TransparentFX

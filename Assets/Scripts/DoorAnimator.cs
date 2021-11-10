@@ -5,16 +5,24 @@ using UnityEngine;
 public class DoorAnimator : MonoBehaviour
 {
     private Animator anim;
+    private bool Start1 = true;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        anim.SetBool("character_nearby", false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        if (Start1)
+        {
+            Debug.Log("zaciatok");
+            anim.SetBool("character_nearby", false);
+            Start1 = false;
+        }
         
     }
 
@@ -27,4 +35,6 @@ public class DoorAnimator : MonoBehaviour
     {
         anim.SetBool("character_nearby", false);
     }
+
+    
 }
