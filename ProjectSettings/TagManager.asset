@@ -9,6 +9,9 @@ TagManager:
   - WallTag
   - BucketForWater
   - BucketHolder
+  - FloorArchimedesTag
+  - WaterBallTag
+  - BathtubTag
   layers:
   - Default
   - TransparentFX

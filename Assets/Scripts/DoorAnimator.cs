@@ -19,7 +19,7 @@ public class DoorAnimator : MonoBehaviour
         
         if (Start1)
         {
-            Debug.Log("zaciatok");
+            
             anim.SetBool("character_nearby", false);
             Start1 = false;
         }
