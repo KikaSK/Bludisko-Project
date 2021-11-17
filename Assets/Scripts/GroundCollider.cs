@@ -17,9 +17,10 @@ public class GroundCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CollidedSpheres.Count>iter && (Time.time - CollidedSpheres[iter].Key) > 3)
+        if(CollidedSpheres.Count>iter && (Time.time - CollidedSpheres[iter].Key) > 2)
         {
-            CollidedSpheres[iter].Value.SetActive(false);
+            Destroy(CollidedSpheres[iter].Value);
+            //CollidedSpheres[iter].Value.SetActive(false);
             iter = (iter+1)%SizeOfList;
         }
     }
@@ -28,14 +29,16 @@ public class GroundCollider : MonoBehaviour
     {
         if(other.CompareTag("WaterBallTag"))
         {
-            if(counter <SizeOfList)
+            if (counter < SizeOfList)
             {
                 CollidedSpheres.Add(new KeyValuePair<float, GameObject>(Time.time, other.gameObject));
                 counter++;
             }
             else
+            {
                 CollidedSpheres[additer] = (new KeyValuePair<float, GameObject>(Time.time, other.gameObject));
-            additer = (additer+1)%SizeOfList;
+                additer = (additer + 1) % SizeOfList;
+            }
         }
     }
 }

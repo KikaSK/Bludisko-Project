@@ -6,7 +6,13 @@ public class BathtubBucketRotator : MonoBehaviour
 {
     public GameObject Bucket;
     Rigidbody BucketRigidbody;
-    Vector3 m_EulerAngleVelocity = new Vector3(0, 0, 90);
+    bool NearBathtub = false;
+    Quaternion start_rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    Quaternion end_rotation = Quaternion.Euler(new Vector3(0, 0, 99));
+    Quaternion lintz = Quaternion.Euler(new Vector3(0, 0, 3));
+    Quaternion i_lintz = Quaternion.Euler(new Vector3(0, 0, -3));
+
+    float t = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +21,23 @@ public class BathtubBucketRotator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (NearBathtub)
+        {
+            if (BucketRigidbody.rotation != end_rotation)
+            {
+                BucketRigidbody.MoveRotation(BucketRigidbody.rotation * lintz);
+            }
+
+        }
+        else
+        {
+            if (BucketRigidbody.rotation != start_rotation)
+            {
+                BucketRigidbody.MoveRotation(BucketRigidbody.rotation * i_lintz);
+            }
+        }
     }
     void OnTriggerEnter(Collider other)
     {
@@ -26,9 +46,10 @@ public class BathtubBucketRotator : MonoBehaviour
             Debug.Log("hitvane");
             // nefunguje, neviem preco
             // mozno to treba cele fixnut do nejakej pozicie alebo co
-            Bucket.transform.rotation = Quaternion.Euler(new Vector3(Bucket.transform.rotation.x + 90, Bucket.transform.rotation.y, Bucket.transform.rotation.z));
+            /*Bucket.transform.rotation = Quaternion.Euler(new Vector3(Bucket.transform.rotation.x + 90, Bucket.transform.rotation.y, Bucket.transform.rotation.z));
             Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
-            BucketRigidbody.MoveRotation(BucketRigidbody.rotation * deltaRotation);
+            BucketRigidbody.MoveRotation(BucketRigidbody.rotation * deltaRotation);*/
+            NearBathtub = true;
 
         }
     }
@@ -37,10 +58,11 @@ public class BathtubBucketRotator : MonoBehaviour
     {
         if (other.CompareTag("BathtubTag"))
         {
-            Bucket.transform.rotation = Quaternion.Euler(new Vector3(Bucket.transform.rotation.x - 90, Bucket.transform.rotation.y, Bucket.transform.rotation.z));
+            //Bucket.transform.rotation = Quaternion.Euler(new Vector3(Bucket.transform.rotation.x - 90, Bucket.transform.rotation.y, Bucket.transform.rotation.z));
             //tiez nefunguje
-            Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * Time.fixedDeltaTime);
-            BucketRigidbody.MoveRotation(BucketRigidbody.rotation * deltaRotation);
+            //Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * Time.fixedDeltaTime);
+            //BucketRigidbody.MoveRotation(BucketRigidbody.rotation * deltaRotation);
+            NearBathtub = false;
 
         }
     }

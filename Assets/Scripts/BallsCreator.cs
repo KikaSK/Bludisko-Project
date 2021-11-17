@@ -14,7 +14,7 @@ public class BallsCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        WaterFlow = 3f;
+        WaterFlow = 2f;
     }
 
     // Update is called once per frame
@@ -27,9 +27,8 @@ public class BallsCreator : MonoBehaviour
             if(iter > 5.0f/WaterFlow)
             {
                 iter = 0;
-                //Debug.Log("insideargimedes" + iter.ToString());
                 GameObject sphere = GameObject.Instantiate(WaterBallPrefab, 
-                    new Vector3(-42.56798f - 6.695f, -1.576401f + 3.874f+ 0.7f, 71.9314f + 5.44f), // position
+                    new Vector3(-42.56798f - 6.695f + Random.Range(-0.1f, 0.1f), -1.576401f + 3.874f+ 0.7f, 71.9314f + 5.44f + Random.Range(-0.1f, 0.1f)), // position
                     new Quaternion(0f, 0f, 0f, 0f)); // rotation
 
                 spheres.Add(sphere);
