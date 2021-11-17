@@ -12,6 +12,11 @@ TagManager:
   - FloorArchimedesTag
   - WaterBallTag
   - BathtubTag
+  - PortalTag1
+  - PortalTag2
+  - PortalTag3
+  - PortalTag4
+  - CubeTag
   layers:
   - Default
   - TransparentFX

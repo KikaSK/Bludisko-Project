@@ -12,7 +12,7 @@ public class BathtubBucketRotator : MonoBehaviour
     Quaternion lintz = Quaternion.Euler(new Vector3(0, 0, 3));
     Quaternion i_lintz = Quaternion.Euler(new Vector3(0, 0, -3));
 
-    float t = 0;
+   
     // Start is called before the first frame update
     void Start()
     {
