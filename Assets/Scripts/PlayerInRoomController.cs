@@ -23,19 +23,34 @@ public class PlayerInRoomController : MonoBehaviour
     void Update()
     {
         //pyramids room control
-        if (transform.position.x > 56.0 &&
+
+
+
+        if (transform.position.x > 54.71 &&
             transform.position.z < -30.5 &&
             transform.position.x < 91.0 &&
             transform.position.z > -68.0)
         {
-            IsInPyramidsRoom = true;
+            
             PyramidsSphere.SetActive(true);
 
         }
         else
         {
-            IsInPyramidsRoom = false;
             PyramidsSphere.SetActive(false);
+        }
+        
+        if (transform.position.x > 59.85 &&
+            transform.position.z < -30.5 &&
+            transform.position.x < 91.0 &&
+            transform.position.z > -68.0)
+        {
+            IsInPyramidsRoom = true;
+        }
+        else
+        {
+            IsInPyramidsRoom = false;
+            
         }
 
         //harry room control
@@ -53,18 +68,27 @@ public class PlayerInRoomController : MonoBehaviour
         }
 
         //Archimedes room control
-        if (transform.position.x > -63.6 &&
+        if (transform.position.x > -62.67 &&
             transform.position.z < 98.0 &&
             transform.position.x < -33.5 &&
-            transform.position.z > 66.9)
+            transform.position.z > 67.59)
         {
             IsInArchimedesRoom = true;
-            ArchimedesSphere.SetActive(true);
-
         }
         else
         {
             IsInArchimedesRoom = false;
+        }
+
+        if (transform.position.x > -71.6 &&
+            transform.position.z < 98.0 &&
+            transform.position.x < -33.5 &&
+            transform.position.z > 61.48)
+        {
+            ArchimedesSphere.SetActive(true);
+        }
+        else
+        {
             ArchimedesSphere.SetActive(false);
         }
     }

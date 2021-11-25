@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5906241956927128206}
   - component: {fileID: 5906241956927128207}
   - component: {fileID: 4761637220133839268}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WaterSphere (2)
   m_TagString: WaterBallTag
   m_Icon: {fileID: 0}

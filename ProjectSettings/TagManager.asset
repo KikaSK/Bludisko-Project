@@ -17,6 +17,9 @@ TagManager:
   - PortalTag3
   - PortalTag4
   - CubeTag
+  - HarryPickuble
+  - PickubleRecieverTag
+  - CrystalTag
   layers:
   - Default
   - TransparentFX
@@ -25,7 +28,7 @@ TagManager:
   - Water
   - UI
   - WallLayer
-  - 
+  - MapLayer
   - 
   - 
   - 

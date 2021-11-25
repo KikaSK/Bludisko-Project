@@ -9,15 +9,36 @@ public class PyramidsBuilder : MonoBehaviour
     public float MaxDistance = 15.0f;
     private bool InsidePyramidsRoom;
 
+    private float ScreenWidth;
+    private float ScreenHeight;
+
+    private float LastClickTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ScreenWidth = Screen.width;
+        ScreenHeight = Screen.height;
+        LastClickTime = Time.time - 10f;
     }
 
     // Update is called once per frame
     void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Time.time - LastClickTime < 0.2f)
+            {
+                MyDoubleClick();
+            }
+            else
+            {
+                LastClickTime = Time.time;
+            }
+        }
+        
+    }
+    private void MyDoubleClick()
     {
         InsidePyramidsRoom = GetComponent<PlayerInRoomController>().IsInPyramidsRoom;
         if (InsidePyramidsRoom)
@@ -25,7 +46,7 @@ public class PyramidsBuilder : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
                 bool is_hit = Physics.Raycast(ray.origin, ray.direction, out hit);
 
                 double x = ray.direction.x;
