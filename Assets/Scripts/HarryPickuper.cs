@@ -8,6 +8,7 @@ public class HarryPickuper : MonoBehaviour
     private int PickedCounter;
 
     private GameObject PickedObject;
+    private Vector3 StartPos;
 
     private float ScreenWidth;
     private float ScreenHeight;
@@ -25,7 +26,7 @@ public class HarryPickuper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsPicked)
+        if(GetComponent<PlayerInRoomController>().IsInHarryRoom  && IsPicked)
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
 
@@ -33,30 +34,38 @@ public class HarryPickuper : MonoBehaviour
                                                    transform.position.y + 2.0f * ray.direction.y,
                                                    transform.position.z + 2.0f * ray.direction.z);
         }
+        if (!GetComponent<PlayerInRoomController>().IsInHarryRoom && IsPicked)
+        {
+            PickedObject.transform.position = StartPos;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(!IsPicked)
+        if (GetComponent<PlayerInRoomController>().IsInHarryRoom)
         {
-            if (other.CompareTag("HarryPickuble"))
+            if (!IsPicked)
             {
-                PickedObject = other.gameObject;
-                Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
+                if (other.CompareTag("HarryPickuble"))
+                {
+                    PickedObject = other.gameObject;
+                    StartPos = PickedObject.transform.position;
+                    Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
 
-                PickedObject.transform.position = new Vector3(transform.position.x + 2.0f * ray.direction.x,
-                                                       transform.position.y + 2.0f * ray.direction.y,
-                                                       transform.position.z + 2.0f * ray.direction.z);
-                IsPicked = true;
+                    PickedObject.transform.position = new Vector3(transform.position.x + 2.0f * ray.direction.x,
+                                                           transform.position.y + 2.0f * ray.direction.y,
+                                                           transform.position.z + 2.0f * ray.direction.z);
+                    IsPicked = true;
+                }
             }
-        }
-        else
-        {
-            if (other.CompareTag("PickubleRecieverTag"))
+            else
             {
-                PickedCounter++;
-                Destroy(PickedObject);
-                IsPicked = false;
+                if (other.CompareTag("PickubleRecieverTag"))
+                {
+                    PickedCounter++;
+                    Destroy(PickedObject);
+                    IsPicked = false;
+                }
             }
         }
     }
