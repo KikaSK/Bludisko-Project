@@ -13,6 +13,13 @@ public class HarryPickuper : MonoBehaviour
     private float ScreenWidth;
     private float ScreenHeight;
 
+    private bool Win = false;
+
+    private int NumberOfPickuble = 11;
+
+    public GameObject Crystal;
+    private float? CrystalTriggerTime = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +28,8 @@ public class HarryPickuper : MonoBehaviour
 
         ScreenWidth = Screen.width;
         ScreenHeight = Screen.height;
+
+        Crystal.SetActive(false);
     }
 
     // Update is called once per frame
@@ -37,6 +46,12 @@ public class HarryPickuper : MonoBehaviour
         if (!GetComponent<PlayerInRoomController>().IsInHarryRoom && IsPicked)
         {
             PickedObject.transform.position = StartPos;
+            IsPicked = false;
+        }
+        if (CrystalTriggerTime.HasValue && Time.time - CrystalTriggerTime.Value  > 3.5f)
+        {
+            Crystal.SetActive(false);
+            CrystalTriggerTime = null;
         }
     }
 
@@ -65,8 +80,26 @@ public class HarryPickuper : MonoBehaviour
                     PickedCounter++;
                     Destroy(PickedObject);
                     IsPicked = false;
+                    if(PickedCounter == NumberOfPickuble && !Win)
+                    {
+                        Win = true;
+                        WinTrigger();
+                    }
                 }
             }
+
+            if(other.CompareTag("CrystalTag"))
+            {
+                Crystal.GetComponent<Animator>().SetTrigger("PlayerTrigger");
+                CrystalTriggerTime = Time.time;
+
+            }
+
         }
+    }
+
+    private void WinTrigger()
+    {
+        Crystal.SetActive(true);
     }
 }

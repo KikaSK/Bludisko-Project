@@ -12,8 +12,8 @@ public class BucketHolder : MonoBehaviour
     private float ScreenWidth;
     private float ScreenHeight;
 
-    public GameObject Sphere1;
     public GameObject Sphere2;
+    public GameObject BathtubFilledTester;
 
 
     // Start is called before the first frame update
@@ -28,7 +28,16 @@ public class BucketHolder : MonoBehaviour
     void Update()
     {
         InsideArchimedesRoom = GetComponent<PlayerInRoomController>().IsInArchimedesRoom;
-        
+        if (!BathtubFilledTester.GetComponent<WaterBallsCounter>().HoldsBucket)
+        {
+            HoldsBucket = false;
+        }
+
+        if (HoldsBucket && !InsideArchimedesRoom)
+        {
+            Bucket.transform.position = BucketStartPosition;
+            HoldsBucket = false;
+        }
     }   
 
 
@@ -36,7 +45,7 @@ public class BucketHolder : MonoBehaviour
     {
         if(other.CompareTag("BucketHolder") && InsideArchimedesRoom)
         {
-           if (!HoldsBucket)
+           if (!HoldsBucket && BathtubFilledTester.GetComponent<WaterBallsCounter>().HoldsBucket)
             {
                 HoldsBucket = true;
                 Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));

@@ -5,14 +5,24 @@ using UnityEngine;
 public class CubeCounter : MonoBehaviour
 {
     int counter = 0;
+    bool Win = false;
+
+    public GameObject Crystal;
+
+    void Start()
+    {
+        
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (counter > 10)
+        if (counter > 10 && !Win)
         {
-            Debug.Log(counter);
-            //// Aj von
+            Win = true;
+            Crystal.SetActive(true);
+
         }
     }
 

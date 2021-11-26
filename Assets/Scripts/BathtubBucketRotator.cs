@@ -23,7 +23,7 @@ public class BathtubBucketRotator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (NearBathtub)
+        if (NearBathtub && GetComponent<BucketHolder>().HoldsBucket)
         {
             if (BucketRigidbody.rotation != end_rotation)
             {
@@ -43,12 +43,7 @@ public class BathtubBucketRotator : MonoBehaviour
     {
         if(other.CompareTag("BathtubTag"))
         {
-            Debug.Log("hitvane");
-            // nefunguje, neviem preco
-            // mozno to treba cele fixnut do nejakej pozicie alebo co
-            /*Bucket.transform.rotation = Quaternion.Euler(new Vector3(Bucket.transform.rotation.x + 90, Bucket.transform.rotation.y, Bucket.transform.rotation.z));
-            Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
-            BucketRigidbody.MoveRotation(BucketRigidbody.rotation * deltaRotation);*/
+            
             NearBathtub = true;
 
         }
@@ -58,10 +53,7 @@ public class BathtubBucketRotator : MonoBehaviour
     {
         if (other.CompareTag("BathtubTag"))
         {
-            //Bucket.transform.rotation = Quaternion.Euler(new Vector3(Bucket.transform.rotation.x - 90, Bucket.transform.rotation.y, Bucket.transform.rotation.z));
-            //tiez nefunguje
-            //Quaternion deltaRotation = Quaternion.Euler(-m_EulerAngleVelocity * Time.fixedDeltaTime);
-            //BucketRigidbody.MoveRotation(BucketRigidbody.rotation * deltaRotation);
+           
             NearBathtub = false;
 
         }

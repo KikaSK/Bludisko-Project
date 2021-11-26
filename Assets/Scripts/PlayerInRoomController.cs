@@ -24,8 +24,6 @@ public class PlayerInRoomController : MonoBehaviour
     {
         //pyramids room control
 
-
-
         if (transform.position.x > 54.71 &&
             transform.position.z < -30.5 &&
             transform.position.x < 91.0 &&
