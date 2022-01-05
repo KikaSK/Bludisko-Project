@@ -6,6 +6,7 @@ public class HarryPickuper : MonoBehaviour
 {
     private bool IsPicked;
     private int PickedCounter;
+    public GameObject ObjectsCountText;
 
     private GameObject PickedObject;
     private Vector3 StartPos;
@@ -81,6 +82,7 @@ public class HarryPickuper : MonoBehaviour
                 if (other.CompareTag("PickubleRecieverTag"))
                 {
                     PickedCounter++;
+                    ObjectsCountText.GetComponent<TMPro.TextMeshProUGUI>().text = PickedCounter.ToString() + "/10";
                     Destroy(PickedObject);
                     IsPicked = false;
                     if(PickedCounter == NumberOfPickuble && !Win)

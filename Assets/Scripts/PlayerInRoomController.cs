@@ -15,7 +15,7 @@ public class PlayerInRoomController : MonoBehaviour
     private GameObject Space1Sphere;
     private GameObject EarthSphere;
 
-
+    public GameObject ObjectsCountHarry;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,7 @@ public class PlayerInRoomController : MonoBehaviour
         ArchimedesSphere = GameObject.Find("ArchimedesSphere");
         Space1Sphere = GameObject.Find("SpaceSphere1");
         EarthSphere = GameObject.Find("EarthSphere");
+        ObjectsCountHarry.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,11 +65,14 @@ public class PlayerInRoomController : MonoBehaviour
             transform.position.x < 37.2 &&
             transform.position.z > 9.2)
         {
+
+            ObjectsCountHarry.SetActive(true);
             IsInHarryRoom = true;
 
         }
         else
         {
+            ObjectsCountHarry.SetActive(false);
             IsInHarryRoom = false;
         }
 
