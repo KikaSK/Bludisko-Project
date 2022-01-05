@@ -7,9 +7,14 @@ public class PlayerInRoomController : MonoBehaviour
     public bool IsInPyramidsRoom;
     public bool IsInHarryRoom;
     public bool IsInArchimedesRoom;
+    public bool IsInSpaceRoom1;
+    public bool IsInEarthRoom;
 
     private GameObject PyramidsSphere;
     private GameObject ArchimedesSphere;
+    private GameObject Space1Sphere;
+    private GameObject EarthSphere;
+
 
 
     // Start is called before the first frame update
@@ -17,6 +22,8 @@ public class PlayerInRoomController : MonoBehaviour
     {
         PyramidsSphere = GameObject.Find("PyramidsSphere");
         ArchimedesSphere = GameObject.Find("ArchimedesSphere");
+        Space1Sphere = GameObject.Find("SpaceSphere1");
+        EarthSphere = GameObject.Find("EarthSphere");
     }
 
     // Update is called once per frame
@@ -88,6 +95,56 @@ public class PlayerInRoomController : MonoBehaviour
         else
         {
             ArchimedesSphere.SetActive(false);
+        }
+
+        //Space1 room control
+        if (transform.position.x > 59.93 &&
+            transform.position.z < 90.0 &&
+            transform.position.x < 83.0 &&
+            transform.position.z > 67.58)
+        {
+            IsInSpaceRoom1 = true;
+        }
+        else
+        {
+            IsInSpaceRoom1 = false;
+        }
+
+        if (transform.position.x > 57.70 &&
+            transform.position.z < 90.0 &&
+            transform.position.x < 83.0 &&
+            transform.position.z > 65.0)
+        {
+            Space1Sphere.SetActive(true);
+        }
+        else
+        {
+            Space1Sphere.SetActive(false);
+        }
+
+        //Earth room control
+        if (transform.position.x > -71.46 &&
+            transform.position.z < -0.06 &&
+            transform.position.x < -51.6 &&
+            transform.position.z > -34.21)
+        {
+            IsInEarthRoom = true;
+        }
+        else
+        {
+            IsInEarthRoom = false;
+        }
+
+        if (transform.position.x > -74.88 &&
+            transform.position.z < 0.06 &&
+            transform.position.x < -47.31 &&
+            transform.position.z > -34.21)
+        {
+            EarthSphere.SetActive(true);
+        }
+        else
+        {
+            EarthSphere.SetActive(false);
         }
     }
 }
