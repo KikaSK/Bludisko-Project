@@ -6,78 +6,46 @@ public class CameraController : MonoBehaviour
 {
     public float rotSpeed = 500.0f;
     public float movSpeed = 5.0f;
-    /*
-    public GameObject LookTransform;
-    bool isTeleporting = false;
-    private Vector3 StartPos = Vector3.zero;
-    private Vector3 EndPos = Vector3.zero;
-    float t = 0f;
-    public float TeleportSpeed = 2f;
-    */
-    /*
-    private float LastClickTime = -10f;
-    private bool click_managed;
-    */
+   
     private float main_time;
     public float click_time;
     private float two_click_time;
     private int count;
-    private float two_twoClicks;//= -10f;
+    private float two_twoClicks;
     private float time;
 
+    public bool MenuOpen;
+    public GameObject Paper1;
+    public GameObject Paper2;
+    public GameObject Paper3;
+    public GameObject Paper4;
+    public GameObject Paper5;
+
+    public bool WinArchimedes = false;
+    public bool WinPyramids = false;
+    public bool WinHarry = false;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         transform.eulerAngles = new Vector3(0, 0, 0);
         Camera.main.transform.eulerAngles = new Vector3(0, 0, 0);
+        Paper1.SetActive(true);
+        Paper2.SetActive(false);
+        Paper3.SetActive(false);
+        Paper4.SetActive(false);
+        Paper5.SetActive(false);
+        MenuOpen = true;
     }
-    /*
-    private float doubleClickTimeLimit = 0.25f;
-
-    protected void Start()
-    {
-        StartCoroutine(InputListener());
-        Cursor.lockState = CursorLockMode.Locked;
-        transform.eulerAngles = new Vector3(0, 0, 0);
-        Camera.main.transform.eulerAngles = new Vector3(0, 0, 0);
-        click_managed = true;
-    }
-
-    // Update is called once per frame
-    private IEnumerator InputListener()
-    {
-        while (enabled)
-        { //Run as long as this is activ
-
-            if (Input.GetMouseButtonDown(0))
-                yield return ClickEvent();
-
-            yield return null;
-        }
-    }
-
-    private IEnumerator ClickEvent()
-    {
-        //pause a frame so you don't pick up the same mouse down event.
-        yield return new WaitForEndOfFrame();
-
-        float count = 0f;
-        while (count < doubleClickTimeLimit)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                DoubleClick();
-                yield break;
-            }
-            count += Time.deltaTime;// increment counter by change in time between frames
-            yield return null; // wait for the next frame
-        }
-        SingleClick();
-    }
-     */
-
     private void SingleClick()
     {
+        if(MenuOpen)
+        {
+            Paper1.SetActive(false);
+            Paper2.SetActive(false);
+            Paper3.SetActive(false);
+            Paper4.SetActive(false);
+            MenuOpen = false;
+        }
         // MyClick();
         //Debug.Log("Single Click");
     }
@@ -90,17 +58,16 @@ public class CameraController : MonoBehaviour
     private void LongPress()
     {
         //Debug.Log("Long Press");
-        float angle = transform.rotation.eulerAngles.y;
-        transform.position += new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle)) * Time.deltaTime * movSpeed;
-
+        if (!MenuOpen)
+        {
+            float angle = transform.rotation.eulerAngles.y;
+            transform.position += new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle)) * Time.deltaTime * movSpeed;
+        }
     }
-
-
 
     // Update is called once per frame
     void Update()
     {
-
         transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
         Camera.main.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed, 0, 0);
 
@@ -152,50 +119,32 @@ public class CameraController : MonoBehaviour
                 main_time = 0.0f;
             }
         }
-
-        /*
-        if (isTeleporting)
-        {
-            transform.position = Vector3.Lerp(StartPos, EndPos, t);
-            t += TeleportSpeed * Time.deltaTime;
-            isTeleporting = t <= 1f;
-            return;
-        }
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
-        {
-            LookTransform.transform.position = hit.point;
-        }
-        */
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("ArchimedesPaperTag") && !GetComponent<PlayerInRoomController>().IsInArchimedesRoom && !WinArchimedes)
+        {
+            Paper2.SetActive(true);
+            MenuOpen = true;
+        }
+        if (other.CompareTag("HarryPaperTag") && !GetComponent<PlayerInRoomController>().IsInHarryRoom && !WinHarry)
+        {
+            Paper3.SetActive(true);
+            MenuOpen = true;
+        }
+        if (other.CompareTag("PyramidsPaperTag") && !GetComponent<PlayerInRoomController>().IsInPyramidsRoom && !WinPyramids)
+        {
+            Paper4.SetActive(true);
+            MenuOpen = true;
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
-        
         if (other.gameObject.CompareTag("WallTag"))
         {
-            
             float angle = transform.rotation.eulerAngles.y;
             transform.position -= new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle)) * Time.deltaTime * movSpeed;
         }
-    }
-
-    private void MyClick()
-    {
-        /*
-            t = 0f;
-            isTeleporting = true;
-            StartPos = transform.position;
-            EndPos = new Vector3(LookTransform.transform.position.x, transform.position.y, LookTransform.transform.position.z);
-            EndPos = 0.9f * (EndPos - StartPos) + StartPos;
-        */
-        
-        
-            /*
-             * float angle = transform.rotation.eulerAngles.y;
-            transform.position += new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle)) * Time.deltaTime * movSpeed;
-        */
-        
     }
 }

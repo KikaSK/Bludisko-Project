@@ -51,7 +51,10 @@ public class HarryPickuper : MonoBehaviour
         if (CrystalTriggerTime.HasValue && Time.time - CrystalTriggerTime.Value  > 3.5f)
         {
             Crystal.SetActive(false);
-            CrystalTriggerTime = null;
+            CrystalTriggerTime = null; 
+            GetComponent<CrystalsPickuper>().crystalcount++;
+            GetComponent<CrystalsPickuper>().CrystalCountText.GetComponent<TMPro.TextMeshProUGUI>().text = GetComponent<CrystalsPickuper>().crystalcount.ToString() + "/10";
+            GetComponent<CameraController>().WinHarry = true;
         }
     }
 
@@ -92,7 +95,6 @@ public class HarryPickuper : MonoBehaviour
             {
                 Crystal.GetComponent<Animator>().SetTrigger("PlayerTrigger");
                 CrystalTriggerTime = Time.time;
-
             }
 
         }

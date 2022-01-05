@@ -20,6 +20,9 @@ TagManager:
   - HarryPickuble
   - PickubleRecieverTag
   - CrystalTag
+  - ArchimedesPaperTag
+  - PyramidsPaperTag
+  - HarryPaperTag
   layers:
   - Default
   - TransparentFX

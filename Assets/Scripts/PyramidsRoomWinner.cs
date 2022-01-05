@@ -20,6 +20,9 @@ public class PyramidsRoomWinner : MonoBehaviour
         {
             Crystal.SetActive(false);
             CrystalTriggerTime = null;
+            GetComponent<CrystalsPickuper>().crystalcount++;
+            GetComponent<CrystalsPickuper>().CrystalCountText.GetComponent<TMPro.TextMeshProUGUI>().text = GetComponent<CrystalsPickuper>().crystalcount.ToString() + "/10";
+            GetComponent<CameraController>().WinPyramids = true;
         }
     }
 
