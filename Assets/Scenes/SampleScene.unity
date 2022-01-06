@@ -28215,15 +28215,16 @@ Transform:
   - {fileID: 446641911}
   - {fileID: 1839661619}
   - {fileID: 1006365778}
+  - {fileID: 1131312855}
   - {fileID: 674496511}
   - {fileID: 981469214}
-  - {fileID: 1131312855}
   - {fileID: 690652542}
   - {fileID: 1648774}
   - {fileID: 1582507477}
   - {fileID: 1912686412}
   - {fileID: 448548760}
   - {fileID: 2144252356}
+  - {fileID: 1106933948}
   - {fileID: 1643090808}
   - {fileID: 51796117}
   - {fileID: 146191242}
@@ -28235,7 +28236,6 @@ Transform:
   - {fileID: 845860065}
   - {fileID: 1827437042}
   - {fileID: 60448436}
-  - {fileID: 1106933948}
   - {fileID: 925405683}
   - {fileID: 1963988283}
   - {fileID: 764365986}
@@ -37733,6 +37733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1922208086}
+  - component: {fileID: 1922208100}
   - component: {fileID: 1922208087}
   - component: {fileID: 1922208092}
   - component: {fileID: 1922208088}
@@ -37761,7 +37762,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922208085}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 51.4, y: 2.5, z: 22.2}
+  m_LocalPosition: {x: -13.6, y: 2.5, z: 1.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -37973,6 +37974,18 @@ MonoBehaviour:
   Crystal5: {fileID: 2001625206}
   crystalcount: 0
   CrystalCountText: {fileID: 1808848877}
+--- !u!114 &1922208100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922208085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd68f027e715c44aa8d097000d4cccfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1923612081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1306868016019400641, guid: 092aa0cf351f6f24eb01e489620f65d9, type: 3}

@@ -68,8 +68,21 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
-        Camera.main.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed, 0, 0);
+
+        //transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
+        //Camera.main.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed, 0, 0);
+
+        //otacanie v PC
+        
+        Camera.main.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed,0, 0);
+        Camera.main.transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
+        
+        Quaternion q = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x,
+                                        Camera.main.transform.rotation.eulerAngles.y,
+                                        Camera.main.transform.rotation.eulerAngles.z);
+
+        transform.rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
+        Camera.main.transform.rotation = q;
 
         if (Input.GetMouseButton(0))
         {
