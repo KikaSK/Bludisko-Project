@@ -75,10 +75,10 @@ public class CameraController : MonoBehaviour
     {
 
         //otacanie v PC
-        /*
+        
         transform.parent.transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
         Camera.main.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed, 0, 0);
-        */
+        
         
         //rotacia playera
         transform.rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
