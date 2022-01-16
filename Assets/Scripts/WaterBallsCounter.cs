@@ -6,7 +6,7 @@ public class WaterBallsCounter : MonoBehaviour
 {
     int counter = 0;
 
-    private int NumberOfWaterballsWin = 150;
+    private int NumberOfWaterballsWin = 100;
     
     private bool Win = false;
     public bool HoldsBucket = true;

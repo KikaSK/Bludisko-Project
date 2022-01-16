@@ -18,6 +18,9 @@ public class HarryPickuper : MonoBehaviour
     public GameObject Crystal;
     private float? CrystalTriggerTime = null;
 
+    public GameObject Sound;
+    bool PlaySound = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,11 @@ public class HarryPickuper : MonoBehaviour
     {
         if(GetComponent<PlayerInRoomController>().IsInHarryRoom  && IsPicked)
         {
+            if (PlaySound)
+            {
+                Sound.GetComponent<AudioSource>().Play();
+                PlaySound = false;
+            }
             PickedObject.transform.position = transform.parent.transform.position + 2.0f * Camera.main.transform.forward;
         }
         if (!GetComponent<PlayerInRoomController>().IsInHarryRoom && IsPicked)
@@ -63,6 +71,8 @@ public class HarryPickuper : MonoBehaviour
                     PickedObject.transform.position = transform.parent.transform.position + 2.0f * Camera.main.transform.forward;
 
                     IsPicked = true;
+                    PlaySound = true;
+                    
                 }
             }
             else

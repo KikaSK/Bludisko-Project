@@ -24,6 +24,7 @@ TagManager:
   - PyramidsPaperTag
   - HarryPaperTag
   - WellSphere
+  - PlayerTag
   layers:
   - Default
   - TransparentFX
