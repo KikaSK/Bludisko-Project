@@ -6,7 +6,7 @@ public class WaterBallsCounter : MonoBehaviour
 {
     int counter = 0;
 
-    private int NumberOfWaterballsWin = 750;
+    private int NumberOfWaterballsWin = 150;
     
     private bool Win = false;
     public bool HoldsBucket = true;
@@ -30,8 +30,6 @@ public class WaterBallsCounter : MonoBehaviour
                 HoldsBucket = false;
                 Bucket.transform.position = BucketStartPosition;
         }
-        
-        
     }
 
     void OnTriggerEnter(Collider other)

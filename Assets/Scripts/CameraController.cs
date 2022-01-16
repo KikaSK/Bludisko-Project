@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
 
     public bool MenuOpen;
     public GameObject Paper1;
+    public GameObject Paper1_1;
     public GameObject Paper2;
     public GameObject Paper3;
     public GameObject Paper4;
@@ -30,6 +31,7 @@ public class CameraController : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, 0);
         Camera.main.transform.eulerAngles = new Vector3(0, 0, 0);
         Paper1.SetActive(true);
+        Paper1_1.SetActive(false);
         Paper2.SetActive(false);
         Paper3.SetActive(false);
         Paper4.SetActive(false);
@@ -40,28 +42,31 @@ public class CameraController : MonoBehaviour
     {
         if(MenuOpen)
         {
-            Paper1.SetActive(false);
+            MenuOpen = false;
+            Paper1_1.SetActive(false);
+            if (Paper1.activeSelf)
+            {
+                Paper1.SetActive(false);
+                Paper1_1.SetActive(true);
+                MenuOpen = true;
+            }
+            
             Paper2.SetActive(false);
             Paper3.SetActive(false);
             Paper4.SetActive(false);
-            MenuOpen = false;
         }
-        // MyClick();
-        //Debug.Log("Single Click");
     }
 
     private void DoubleClick()
     {
-        //Debug.Log("Double Click");
     }
 
     private void LongPress()
     {
-        //Debug.Log("Long Press");
         if (!MenuOpen)
         {
             float angle = transform.rotation.eulerAngles.y;
-            transform.position += new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle)) * Time.deltaTime * movSpeed;
+            transform.parent.transform.position += new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle)) * Time.deltaTime * movSpeed;
         }
     }
 
@@ -69,20 +74,14 @@ public class CameraController : MonoBehaviour
     void Update()
     {
 
-        //transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
-        //Camera.main.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed, 0, 0);
-
         //otacanie v PC
+        /*
+        transform.parent.transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
+        Camera.main.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed, 0, 0);
+        */
         
-        Camera.main.transform.Rotate(-Input.GetAxis("Mouse Y") * Time.deltaTime * rotSpeed,0, 0);
-        Camera.main.transform.Rotate(0, Input.GetAxis("Mouse X") * Time.deltaTime * rotSpeed, 0);
-        
-        Quaternion q = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x,
-                                        Camera.main.transform.rotation.eulerAngles.y,
-                                        Camera.main.transform.rotation.eulerAngles.z);
-
+        //rotacia playera
         transform.rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
-        Camera.main.transform.rotation = q;
 
         if (Input.GetMouseButton(0))
         {
@@ -157,7 +156,7 @@ public class CameraController : MonoBehaviour
         if (other.gameObject.CompareTag("WallTag"))
         {
             float angle = transform.rotation.eulerAngles.y;
-            transform.position -= new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle)) * Time.deltaTime * movSpeed;
+            transform.parent.transform.position -= new Vector3(Mathf.Sin(Mathf.Deg2Rad * angle), 0, Mathf.Cos(Mathf.Deg2Rad * angle)) * Time.deltaTime * movSpeed;
         }
     }
 }

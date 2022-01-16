@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundCollider : MonoBehaviour
 {
-    private int SizeOfList = 1000;
+    private int SizeOfList = 150;
     List<KeyValuePair<float, GameObject>> CollidedSpheres = new List<KeyValuePair<float, GameObject>>();
     int iter = 0;
     int additer = 0;
@@ -17,7 +17,7 @@ public class GroundCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CollidedSpheres.Count>iter && (Time.time - CollidedSpheres[iter].Key) > 2)
+        if(CollidedSpheres.Count>iter && (Time.time - CollidedSpheres[iter].Key) > 1)
         {
             Destroy(CollidedSpheres[iter].Value);
             //CollidedSpheres[iter].Value.SetActive(false);
@@ -36,6 +36,7 @@ public class GroundCollider : MonoBehaviour
             }
             else
             {
+                Destroy(CollidedSpheres[additer].Value);
                 CollidedSpheres[additer] = (new KeyValuePair<float, GameObject>(Time.time, other.gameObject));
                 additer = (additer + 1) % SizeOfList;
             }

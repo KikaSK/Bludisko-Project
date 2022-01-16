@@ -29,7 +29,7 @@ public class CrystalsPickuper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CrystalSpace1TriggerTime.HasValue && Time.time - CrystalSpace1TriggerTime.Value > 3.5f)
+        if (CrystalSpace1TriggerTime.HasValue && Time.time - CrystalSpace1TriggerTime.Value > 2.5f)
         {
             CrystalSpace1.SetActive(false);
             CrystalSpace1TriggerTime = null;
@@ -37,7 +37,7 @@ public class CrystalsPickuper : MonoBehaviour
             CrystalCountText.GetComponent<TMPro.TextMeshProUGUI>().text = crystalcount.ToString() + "/10";
         }
 
-        if (CrystalEarthTriggerTime.HasValue && Time.time - CrystalEarthTriggerTime.Value > 3.5f)
+        if (CrystalEarthTriggerTime.HasValue && Time.time - CrystalEarthTriggerTime.Value > 2.5f)
         {
             CrystalEarth.SetActive(false);
             CrystalEarthTriggerTime = null;

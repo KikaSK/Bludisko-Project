@@ -9,16 +9,11 @@ public class PyramidsBuilder : MonoBehaviour
     public float MaxDistance = 15.0f;
     private bool InsidePyramidsRoom;
 
-    private float ScreenWidth;
-    private float ScreenHeight;
-
     private float LastClickTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        ScreenWidth = Screen.width;
-        ScreenHeight = Screen.height;
         LastClickTime = Time.time - 10f;
     }
 
@@ -46,7 +41,7 @@ public class PyramidsBuilder : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
+                Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2));
                 bool is_hit = Physics.Raycast(ray.origin, ray.direction, out hit);
 
                 double x = ray.direction.x;
@@ -55,7 +50,6 @@ public class PyramidsBuilder : MonoBehaviour
 
                 double cosine = Mathf.Sqrt((float)((x * x + z * z) / (x * x + y * y + z * z)));
                 float dist = Mathf.Min((float)(Distance / (cosine + 0.001)), MaxDistance);
-                //float dist = (float)Distance;
 
                 Vector3 new_cube_point;
                 if (is_hit)
@@ -78,9 +72,9 @@ public class PyramidsBuilder : MonoBehaviour
                 }
 
 
-                GameObject new_object = Instantiate(cube, transform.parent);
-                new_object.transform.position = new_cube_point;
+                GameObject new_object = Instantiate(cube, transform.parent.parent);
 
+                new_object.transform.position = new_cube_point;
             }
         }
     }

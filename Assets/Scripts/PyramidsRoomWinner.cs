@@ -16,7 +16,7 @@ public class PyramidsRoomWinner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CrystalTriggerTime.HasValue && Time.time - CrystalTriggerTime.Value > 3.5f)
+        if (CrystalTriggerTime.HasValue && Time.time - CrystalTriggerTime.Value > 2.5f)
         {
             Crystal.SetActive(false);
             CrystalTriggerTime = null;

@@ -7,10 +7,8 @@ public class BucketHolder : MonoBehaviour
     public bool HoldsBucket = false;
     private bool InsideArchimedesRoom;
     public GameObject Bucket;
-    private float BucketPositionMultiplyer = 1.0f;
+    private float BucketPositionMultiplyer;
     private Vector3 BucketStartPosition;
-    private float ScreenWidth;
-    private float ScreenHeight;
 
     public GameObject Sphere2;
     public GameObject BathtubFilledTester;
@@ -20,8 +18,7 @@ public class BucketHolder : MonoBehaviour
     void Start()
     {
         BucketStartPosition = Bucket.transform.position;
-        ScreenWidth = Screen.width;
-        ScreenHeight = Screen.height;
+        BucketPositionMultiplyer = Bucket.GetComponent<BucketMover>().BucketPositionMultiplyer;
     }
 
     // Update is called once per frame
@@ -48,7 +45,7 @@ public class BucketHolder : MonoBehaviour
            if (!HoldsBucket && BathtubFilledTester.GetComponent<WaterBallsCounter>().HoldsBucket)
             {
                 HoldsBucket = true;
-                Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
+                Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2));
                 Bucket.transform.position = new Vector3(transform.position.x + BucketPositionMultiplyer * ray.direction.x,
                                                         transform.position.y - 0.5f + BucketPositionMultiplyer * ray.direction.y,
                                                         transform.position.z + BucketPositionMultiplyer * ray.direction.z);

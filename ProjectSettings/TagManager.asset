@@ -23,6 +23,7 @@ TagManager:
   - ArchimedesPaperTag
   - PyramidsPaperTag
   - HarryPaperTag
+  - WellSphere
   layers:
   - Default
   - TransparentFX

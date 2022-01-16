@@ -11,12 +11,9 @@ public class HarryPickuper : MonoBehaviour
     private GameObject PickedObject;
     private Vector3 StartPos;
 
-    private float ScreenWidth;
-    private float ScreenHeight;
-
     private bool Win = false;
 
-    private int NumberOfPickuble = 11;
+    private int NumberOfPickuble = 10;
 
     public GameObject Crystal;
     private float? CrystalTriggerTime = null;
@@ -27,9 +24,6 @@ public class HarryPickuper : MonoBehaviour
         IsPicked = false;
         PickedCounter = 0;
 
-        ScreenWidth = Screen.width;
-        ScreenHeight = Screen.height;
-
         Crystal.SetActive(false);
     }
 
@@ -38,18 +32,14 @@ public class HarryPickuper : MonoBehaviour
     {
         if(GetComponent<PlayerInRoomController>().IsInHarryRoom  && IsPicked)
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
-
-            PickedObject.transform.position = new Vector3(transform.position.x + 2.0f * ray.direction.x,
-                                                   transform.position.y + 2.0f * ray.direction.y,
-                                                   transform.position.z + 2.0f * ray.direction.z);
+            PickedObject.transform.position = transform.parent.transform.position + 2.0f * Camera.main.transform.forward;
         }
         if (!GetComponent<PlayerInRoomController>().IsInHarryRoom && IsPicked)
         {
             PickedObject.transform.position = StartPos;
             IsPicked = false;
         }
-        if (CrystalTriggerTime.HasValue && Time.time - CrystalTriggerTime.Value  > 3.5f)
+        if (CrystalTriggerTime.HasValue && Time.time - CrystalTriggerTime.Value  > 2.5f)
         {
             Crystal.SetActive(false);
             CrystalTriggerTime = null; 
@@ -69,11 +59,9 @@ public class HarryPickuper : MonoBehaviour
                 {
                     PickedObject = other.gameObject;
                     StartPos = PickedObject.transform.position;
-                    Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
 
-                    PickedObject.transform.position = new Vector3(transform.position.x + 2.0f * ray.direction.x,
-                                                           transform.position.y + 2.0f * ray.direction.y,
-                                                           transform.position.z + 2.0f * ray.direction.z);
+                    PickedObject.transform.position = transform.parent.transform.position + 2.0f * Camera.main.transform.forward;
+
                     IsPicked = true;
                 }
             }

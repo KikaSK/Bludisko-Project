@@ -10,19 +10,14 @@ public class BucketMover : MonoBehaviour
     bool InsideArchimedesRoom;
 
     Rigidbody BucketRigidbody;
-    public float BucketSpeed = 5f;
+    public float BucketSpeed = 10f;
 
-    private float ScreenWidth;
-    private float ScreenHeight;
-
-    private float BucketPositionMultiplyer = 1.5f;
+    public float BucketPositionMultiplyer = 2.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         BucketRigidbody = GetComponent<Rigidbody>();
-        ScreenWidth = Screen.width;
-        ScreenHeight = Screen.height;
     }
 
     // Update is called once per frame
@@ -34,7 +29,7 @@ public class BucketMover : MonoBehaviour
         if (HoldsBucketMover && InsideArchimedesRoom)
         {
             
-            Ray ray = Camera.main.ScreenPointToRay(new Vector2(ScreenWidth / 2, ScreenHeight / 2));
+            Ray ray = Camera.main.ScreenPointToRay(new Vector2(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2));
 
             Vector3 CurrPosition = transform.position;
             Vector3 NewPosition = new Vector3(ray.origin.x + BucketPositionMultiplyer * ray.direction.x,

@@ -14,7 +14,7 @@ public class BallsCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        WaterFlow = 2f;
+        WaterFlow = 1.5f;
     }
 
     // Update is called once per frame
